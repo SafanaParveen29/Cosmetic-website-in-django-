@@ -1,0 +1,90 @@
+{%extends 'admin_header.html'%}
+{% load static %}
+{% include 'adminfooter.html'%}
+
+
+{% block content %}
+
+<main>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success'%}
+<div class="alert success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  {{message}}
+</div>
+{% elif  message.tags == 'error' %}
+<div class="alert error">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>{{message}}</strong>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<br>
+<h1 class ="text-3xl font-semibold">Your Retailers</h1>
+<br><br>
+<table id="customers" class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker">
+  <colgroup>    
+    <col width="5%">    
+    <col width="27%">
+    <col width="29%">
+    <col width="29%">
+    <col width="10%"> 
+</colgroup>
+  <tr class="px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
+    <th>#</th>
+    <th>User Name</th>
+    <th>Email</th>
+    <th>Number</th>
+    <th>Remove</th>
+  </tr>
+  {%for i in subusers %}
+  <tr class="px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
+    <td style="text-align: center;">{{forloop.counter}}</td>
+    <td>{{i.subadmin_username}}</td>
+    <td>{{i.subadmin_email}}</td>
+    <td>{{i.subadmin_Number}}</td>
+    <td class="text-center">
+      <a href="{%url 'delete_subuser' i.id %}" class="button">Delete </a>
+    </td>  
+  </tr>
+  {%endfor%}
+</table>
+
+</main>
+<style>
+#customers {
+  border-collapse: collapse;
+  width:1000px;
+  margin-top: 0px;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+
+.button {  
+  border: none;  
+  border: 2px outset #ddd;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+</style>
+{% endblock %}
+

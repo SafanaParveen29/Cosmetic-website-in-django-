@@ -1,0 +1,225 @@
+{%load static%}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<!-- belle/short-description.html   11 Nov 2019 12:43:10 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Digital emporium featuring high-quality cosmetics</title>
+<meta name="description" content="description">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="{%static 'assets/images/favicon.png'%}" />
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="{%static 'assets/css/plugins.css'%}">
+<!-- Bootstap CSS -->
+<link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/responsive.css'%}">
+</head>
+<body class="template-product belle">
+	<div class="pageWrapper">
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" method="POST">
+                  {%csrf_token%}
+                    <button class="go-btn search__button" type="submit">
+                      <i class="icon anm anm-search-l"></i>
+                    </button>
+                    <input class="search__input" type="search" name="q" placeholder="Search Products..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+            </div>  
+        </div>
+        <div class="top-header">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-10 col-sm-8 col-md-5 col-lg-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+              <div class="text-center">
+                <p class="top-header_middle-text">Digital emporium featuring high-quality cosmetics</p>
+              </div>
+            </div>
+            <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+              <span class="user-menu d-block d-lg-none">
+                <i class="anm anm-user-al" aria-hidden="true"></i>
+              </span>
+                <ul class="customer-links list-inline">
+                    {% if request.session.username %}
+                        <li><a href="{%url 'user_logout' %}">Logout</a></li>
+                    {%else%}    
+                        <li><a href="{%url 'user_login' %}">Login</a></li>
+                    {%endif%}        
+                    {% if request.session.username %}
+                        <li><a href="{%url 'edit_users' id=request.session.user_id %}"> Hi, {{request.session.username}}</a></li>
+                    {%else%}  
+                        <li><a href="{%url 'register' %}">Create Account</a></li>
+                    {%endif%}
+                        <li><a href="{%url 'wishlist' %}">Wishlist</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+        <!--End Top Header-->
+        <!--Header-->
+        <div class="header-wrap animated d-flex">
+            <div class="container-fluid">        
+                <div class="row align-items-center">
+                    <!--Desktop Logo-->
+                    <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                      <img src="{%static 'assets/images/worldwide.png'%}" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    </div>
+                    <!--End Desktop Logo-->
+                    <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                        <div class="d-block d-lg-none">
+                            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                                <i class="icon anm anm-times-l"></i>
+                                <i class="anm anm-bars-r"></i>
+                            </button>
+                        </div>
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav">
+                            <!-- for mobile -->
+                            <ul id="siteNav" class="site-nav medium right hidearrow">
+                                <li class="lvl1 parent megamenu"><a href="{%url 'body' %}">Home</a>
+                                </li>                                    
+                                <li class="lvl1 parent megamenu"><a href="{%url 'product' %}">Product</a>
+                                  <div class="megamenu style">
+                                    <ul class="grid mmWrapper" >
+                                        <li class="grid__item one-whole">
+                                            <ul class="grid">
+                                                <li class="grid__item lvl-1 col-md-2 col-lg-3"><a href="{% url 'products_by_category' 'lips' %}" class="site-nav lvl-1">Lips</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="{% url 'products_by_category' category='lipsticks & liners' %}" class="site-nav lvl-2">Lipsticks & Liners</a></li>
+                                                        <li class="lvl-2"><a href="{% url 'products_by_category' category='liquid lipsticks' %}" class="site-nav lvl-2">Liquid Lipsticks</a></li>
+                                                        <li class="lvl-2"><a href="{% url 'products_by_category' category='lip Balm' %}" class="site-nav lvl-2">Lip Balm</a></li>
+                                                        <li class="lvl-2"><a href="{% url 'products_by_category' category='gloss' %}" class="site-nav lvl-2">Gloss</a></li>
+                                                      </ul>
+                                                </li>
+                                                <li class="grid__item lvl-1 col-md-3 col-lg-2"><a href="{% url 'products_by_category' category='eyes' %}" class="site-nav lvl-1">Eyes</a>
+                                                    <ul class="subLinks">
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='eye liner' %}" class="site-nav lvl-2">Eye Liner</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='kajal & lohl' %}" class="site-nav lvl-2">Kajal & Kohl</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='mascara' %}" class="site-nav lvl-2">Mascara</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='eye Shadow' %}" class="site-nav lvl-2">Eye Shadow</a></li>
+                                                    </ul>
+                                                  </li>
+                                                <li class="grid__item lvl-1 col-md-2 col-lg-2"><a href="{% url 'products_by_category' category='face' %}" class="site-nav lvl-1">Face</a>
+                                                    <ul class="subLinks">
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='foundation' %}" class="site-nav lvl-2">Foundation</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='primer' %}" class="site-nav lvl-2">Primer</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='blush' %}" class="site-nav lvl-2">Blush</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='highlighter' %}" class="site-nav lvl-2">Highlighter</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='concealer' %}" class="site-nav lvl-2">Concealer</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='compact' %}" class="site-nav lvl-2">Compact</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="grid__item lvl-1 col-md-3 col-lg-2"><a href="{% url 'products_by_category' category='nails' %}" class="site-nav lvl-1">Nails</a>
+                                                    <ul class="subLinks">
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='Nail Color' %}" class="site-nav lvl-2">Nail Color</a></li>
+                                                      <li class="lvl-2"><a href="{% url 'products_by_category' category='Polish Remover' %}" class="site-nav lvl-2">Polish Remover</a></li>
+                                                      
+                                                    </ul>
+                                                </li>
+                                                <li class="grid__item lvl-1 col-md-2 col-lg-3"><a href="{% url 'products_by_category' category='skin care' %}" class="site-nav lvl-1">Skin Care</a>
+                                                  <ul class="subLinks">
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='moisturizers' %}" class="site-nav lvl-2">Moisturizers</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='serums' %}" class="site-nav lvl-2">Serums</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='sun production' %}" class="site-nav lvl-2">Sun Production</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='face cleansers' %}" class="site-nav lvl-2">Face Cleansers</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='makeup x skincare' %}" class="site-nav lvl-2">Makeup X Skincare</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='makeup removers' %}" class="site-nav lvl-2">Makeup Removers</a></li>
+                                                    <li class="lvl-2"><a href="{% url 'products_by_category' category='masks and facial kits' %}" class="site-nav lvl-2">Masks and Facial kits</a></li>
+                                                  </ul>
+                                              </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                </li>
+                                <li class="lvl1"><a href="{%url 'order_confirmation'%}"><b>Buy Now!</b> <i class="anm anm-angle-down-l"></i></a></li>
+                        </ul>
+                        </nav>
+                        <!--End Desktop Menu-->
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                        <div class="logo">
+                          <img src="{%static 'assets/images/worldwide.png'%}" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                        <div class="site-cart">
+                            <a href="{%url 'cart'%}"  style="font-size: 24px;" title="Cart">
+                                <i class="icon anm anm-bag-l"></i>                                
+                            </a>
+
+                        </div>
+                        <div class="site-header__search">
+                            <button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Header-->
+        <!--Mobile Menu-->
+        <div class="mobile-nav-wrapper" role="navigation">
+		<div class="closemobileMenu"><i class="icon anm anm-times-l pull-right"></i> Close Menu</div>
+        <ul id="MobileNav" class="mobile-nav">
+        	<li class="lvl1 parent megamenu"><a href="{%url 'body' %}">Home</a>          
+        </li>
+        	<li class="lvl1 parent megamenu"><a href="{%url 'product' %}">Product <i class="anm anm-plus-l"></i></a>
+          <ul>
+            <li><a href="{% url 'products_by_category' 'lips' %}" class="site-nav">lips<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='lipsticks & liners' %}" class="site-nav lvl-2">Lipsticks & Liners</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='liquid lipsticks' %}" class="site-nav lvl-2">Liquid Lipsticks</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='lip Balm' %}" class="site-nav lvl-2">Lip Balm</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='gloss' %}" class="site-nav lvl-2">Gloss</a></li>
+             </ul>
+            </li>
+            <li><a href="{% url 'products_by_category' category='eyes' %}" class="site-nav">Eyes<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='eye liner' %}" class="site-nav lvl-2">Eye Liner</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='kajal & lohl' %}" class="site-nav lvl-2">Kajal & Kohl</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='mascara' %}" class="site-nav lvl-2">Mascara</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='eye Shadow' %}" class="site-nav lvl-2">Eye Shadow</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'products_by_category' category='face' %}" class="site-nav">Face<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='foundation' %}" class="site-nav lvl-2">Foundation</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='primer' %}" class="site-nav lvl-2">Primer</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='blush' %}" class="site-nav lvl-2">Blush</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='highlighter' %}" class="site-nav lvl-2">Highlighter</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='concealer' %}" class="site-nav lvl-2">Concealer</a></li>
+                <li class="site-nav"><a href="{% url 'products_by_category' category='compact' %}" class="site-nav lvl-2">Compact</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'products_by_category' category='nails' %}" class="site-nav">Nails<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="{% url 'products_by_category' category='Nail Color' %}" class="site-nav lvl-2">Nail Color</a></li>
+                <li><a href="{% url 'products_by_category' category='Polish Remover' %}" class="site-nav lvl-2">Polish Remover</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'products_by_category' category='skin care' %}" class="site-nav">Skin Care<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='moisturizers' %}" class="site-nav lvl-2">Moisturizers</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='serums' %}" class="site-nav lvl-2">Serums</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='sun production' %}" class="site-nav lvl-2">Sun Production</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='face cleansers' %}" class="site-nav lvl-2">Face Cleansers</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='makeup x skincare' %}" class="site-nav lvl-2">Makeup X Skincare</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='makeup removers' %}" class="site-nav lvl-2">Makeup Removers</a></li>
+                <li class="lvl-2"><a href="{% url 'products_by_category' category='masks and facial kits' %}" class="site-nav lvl-2">Masks and Facial kits</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="lvl1"><a href="{%url 'order_confirmation'%}"><b>Buy Now!</b></a></li>
+      </ul>
+	</div>
+
+        <!--End Mobile Menu-->

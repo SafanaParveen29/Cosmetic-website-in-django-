@@ -1,0 +1,33 @@
+{%extends 'admin_header.html'%}
+{% load static %}
+{% include 'adminfooter.html'%}
+
+
+{% block content %}
+
+<main>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success'%}
+<div class="alert success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  {{message}}
+</div>
+{% elif  message.tags == 'error' %}
+<div class="alert error">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>{{message}}</strong>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{%if request.session.admin_username %}
+<h1 class="text-3xl font-semibold">welcome back! {{request.session.admin_username}}</h1>
+{%elif request.session.subadmin_username %}
+<h1 class="text-3xl font-semibold">welcome back! {{request.session.subadmin_username}}</h1>
+{%endif%}
+</main>
+  
+{% endblock %}
+

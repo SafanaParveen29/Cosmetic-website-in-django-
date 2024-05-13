@@ -1,0 +1,107 @@
+{% load static %}
+{%include 'header.html'%}
+{% block content %}
+  
+    <!--Body Content-->
+    
+    
+    <div id="page-content">
+    	<!--Page Title-->
+    	<div class="page section-header text-center">
+			<div class="page-title">
+                {% if messages %}
+                    {% for message in messages %}
+                        {%if message.tags == 'success'%}
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ message }} 
+                        </div>
+                        {%elif  message.tags == 'error'%}
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{message}}
+                        </div>
+                        {%endif%}
+                    {% endfor %}
+                {% endif %}
+
+        		<div class="wrapper"><h1 class="page-width">Update Profile</h1></div>
+      		</div>
+		</div>
+        <!--End Page Title-->        
+        <div class="container">
+        	<div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+                	<div class="mb-4">
+                       <form method="post" action="#" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">
+                        {%csrf_token%}	
+                        
+                          <div class="row">
+	                          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="FirstName">First Name</label>
+                                    <input type="text" name="FirstName" placeholder="First Name" id="FirstName" value="{{useredit.FirstName}}" required>
+                                </div>
+                               </div>
+                               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="LastName">Last Name</label>
+                                    <input type="text" name="LastName" placeholder="Last Name" id="LastName" value="{{useredit.LastName}}" required>
+                                </div>
+                               </div>
+                               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="username">User Name</label>
+                                    <input type="text" name="username" placeholder="user Name" id="LastName" required value="{{useredit.username}}">
+                                </div>
+                               </div>
+                               
+                               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="PhoneNumber">Contact Number</label>
+                                    <input type="text" name="PhoneNumber" placeholder="PhoneNumber" id="PhoneNumber" autocorrect="off" required value="{{useredit.PhoneNumber}}">
+                                </div>
+                            </div>
+
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="CustomerEmail">Email</label>
+                                        <input type="email" name="CustomerEmail" placeholder="Email" id="CustomerEmail" autocorrect="off" autocapitalize="off" required value="{{useredit.CustomerEmail}}">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="OldPassword">Password</label>
+                                        <input type="Password" value="" name="OldPassword" placeholder="OldPassword" id="CustomerPassword" required >                        	
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="CustomerPassword">Password</label>
+                                        <input type="password" value="" name="CustomerPassword" placeholder="Password" id="CustomerPassword" required >                        	
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="ConfirmPassword">Confirm Password</label>
+                                        <input type="password" value="" name="ConfirmPassword" placeholder="Confirm Password" id="CustomerPassword" required>                        	
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="row">
+                            <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+                                <input type="submit" class="btn mb-3" value="Update">
+                            </div>
+                         </div>
+                        
+                     </form>
+                    </div>
+               	</div>
+            </div>
+        </div>        
+    </div>
+{%endblock%}
+{%include 'footer.html'%}
+    <!--End Body Content-->
+    
+    

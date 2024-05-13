@@ -1,0 +1,166 @@
+{% load static %}
+{%include 'header.html'%}
+{% block content %}
+
+
+<div id="page-content" >
+    <!--Collection Banner-->
+    <div class="collection-header" >
+        <div class="collection-hero">
+            <div class="collection-hero__image"><img class="blur-up ls-is-cached lazyloaded" data-src="{%static 'assets/images/cat-women4.jpg'%}" src="{%static 'assets/images/cat-women4.jpg'%}" alt="Women" title="Women"></div>
+        </div>
+    </div>
+    <!--End Collection Banner-->
+    
+    <div class="container-fluid">
+        <br><br><br>  
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                <div class="productList">
+                    <div class="grid-products grid--view-items">
+                        <div class="row">
+                        {%for i in data %}
+                        {%if i.StackQuantity > 0%}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                            <div class="product-image">
+                                <a href="{%url 'viewProduct' id=i.id %}" class="grid-view-item__link">
+                                    <img class="primary blur-up lazyload" data-src="/media/{{i.img1}}" src="/media/{{i.img1}}" alt="{{i.ProductName}}" title="product">
+                                    <img class="hover blur-up lazyload" data-src="/media/{{i.img2}}" src="/media/{{i.img2}}" alt="{{i.ProductName}}" title="product">
+                                </a>
+                                <form class="variants add" action="{% url 'add_to_cart' i.id %}">
+                                    <button class="btn btn-addto-cart" type="submit" >Add To Cart</button>
+                                </form>
+                            </div>
+                            <div class="product-details text-center">
+                                <div class="product-name">
+                                    <a href="{%url 'viewProduct' id=i.id %}">{{i.ProductName}}</a>
+                                </div>
+                                <div class="product-price">
+                                    {% if i.offerPrice|add:0 > 0 %}
+                                    <span class="old-price">₹{{i.ActualPrice}}</span>
+                                    <span class="price">₹{{i.offerPrice}}</span>
+                                    {%else %}
+                                    <span class="price">₹{{i.ActualPrice}}</span>
+                                    {%endif%}
+                                </div>                                        
+                            </div>                            
+                        </div>
+                        {%else%} 
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item grid-view-item style2 grid-view-item--sold-out">
+                            <div class="grid-view_image">
+                                <!-- start product image -->
+                                <a href="{%url 'viewProduct' id=i.id %}" class="grid-view-item__link">
+                                    
+                                    <!-- image -->
+                                    <img class="grid-view-item__image primary blur-up ls-is-cached lazyloaded" data-src="/media/{{i.img1}}" src="/media/{{i.img1}}" alt="{{i.ProductName}}" title="product">
+                                    <!-- End image -->
+                                    <!-- Hover image -->
+                                    <img class="grid-view-item__image hover blur-up ls-is-cached lazyloaded" data-src="/media/{{i.img2}}" src="/media/{{i.img2}}" alt="{{i.ProductName}}" title="product">
+                                    <div class="product-labels">
+                                        <span class="lbl on-sale">Sold Out</span>                                        
+                                    </div>
+                                </a>
+                                <div class="product-details hoverDetails text-center mobile">
+                                    <div class="product-name">
+                                        <a href="{%url 'viewProduct' id=i.id %}">{{i.ProductName}}</a>
+                                    </div>
+                                    <!-- End product name -->
+                                    <!-- product price -->
+                                    
+                                    <div class="product-price">
+                                        
+                                        {%if i.offerPrice|add:0 > 0 %}
+                                        <span class="old-price">₹{{i.ActualPrice}}</span>
+                                        <span class="price">₹{{i.offerPrice}}</span>
+                                        {%else %}
+                                        <span class="old-price">₹{{i.ActualPrice}}</span>
+                                        {%endif%}
+                                    </div>
+                                    <!-- End product price -->
+                                    
+                                </div>
+                                <!-- End product details -->
+                                </div>
+                        </div>
+                        {%endif%}
+                        {%endfor%} 
+                    </div>
+                    {%for i in data1 %}
+                        {%if i.StackQuantity > 0%}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                            <div class="product-image">
+                                <a href="{%url 'viewProduct' id=i.id %}" class="grid-view-item__link">
+                                    <img class="primary blur-up lazyload" data-src="/media/{{i.img1}}" src="/media/{{i.img1}}" alt="{{i.ProductName}}" title="product">
+                                    <img class="hover blur-up lazyload" data-src="/media/{{i.img2}}" src="/media/{{i.img2}}" alt="{{i.ProductName}}" title="product">
+                                </a>
+                                <form class="variants add" action="{% url 'add_to_cart' i.id %}">
+                                    <button class="btn btn-addto-cart" type="submit" >Add To Cart</button>
+                                </form>
+                            </div>
+                            <div class="product-details text-center">
+                                <div class="product-name">
+                                    <a href="{%url 'viewProduct' id=i.id %}">{{i.ProductName}}</a>
+                                </div>
+                                <div class="product-price">
+                                    {% if i.offerPrice|add:0 > 0 %}
+                                    <span class="old-price">₹{{i.ActualPrice}}</span>
+                                    <span class="price">₹{{i.offerPrice}}</span>
+                                    {%else %}
+                                    <span class="price">₹{{i.ActualPrice}}</span>
+                                    {%endif%}
+                                </div>                                        
+                            </div>                            
+                        </div>
+                        {%else%} 
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item grid-view-item style2 grid-view-item--sold-out">
+                            <div class="grid-view_image">
+                                <!-- start product image -->
+                                <a href="{%url 'viewProduct' id=i.id %}" class="grid-view-item__link">
+                                    
+                                    <!-- image -->
+                                    <img class="grid-view-item__image primary blur-up ls-is-cached lazyloaded" data-src="/media/{{i.img1}}" src="/media/{{i.img1}}" alt="{{i.ProductName}}" title="product">
+                                    <!-- End image -->
+                                    <!-- Hover image -->
+                                    <img class="grid-view-item__image hover blur-up ls-is-cached lazyloaded" data-src="/media/{{i.img2}}" src="/media/{{i.img2}}" alt="{{i.ProductName}}" title="product">
+                                    <div class="product-labels">
+                                        <span class="lbl on-sale">Sold Out</span>                                        
+                                    </div>
+                                </a>
+                                <div class="product-details hoverDetails text-center mobile">
+                                    <div class="product-name">
+                                        <a href="{%url 'viewProduct' id=i.id %}">{{i.ProductName}}</a>
+                                    </div>
+                                    <!-- End product name -->
+                                    <!-- product price -->
+                                    
+                                    <div class="product-price">
+                                        
+                                        {%if i.offerPrice|add:0 > 0 %}
+                                        <span class="old-price">₹{{i.ActualPrice}}</span>
+                                        <span class="price">₹{{i.offerPrice}}</span>
+                                        {%else %}
+                                        <span class="old-price">₹{{i.ActualPrice}}</span>
+                                        {%endif%}
+                                    </div>
+                                    <!-- End product price -->
+                                    
+                                </div>
+                                <!-- End product details -->
+                                </div>
+                        </div>
+                        {%endif%}
+                        {%endfor%} 
+                </div>   
+            </div>
+            <!--End Main Content-->
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{%endblock%}
+{%include 'footer.html'%}
+<!--End Body Content-->
+

@@ -1,0 +1,107 @@
+{%extends 'admin_header.html'%}
+{% include 'adminfooter.html'%}
+{% load static %}
+{% block content %}
+
+
+<div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}" class="dark">
+  <!-- Loading screen -->
+  <div x-ref="loading" class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker hidden">
+    Loading.....
+  </div>
+    <div class="flex flex-col items-center justify-center min-h-screen p-4 space-y-4 antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light" >
+      <!-- Brand -->
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'success'%}
+      <div class="alert success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{message}}
+      </div>
+      {% elif  message.tags == 'error' %}
+      <div class="alert error">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>{{message}}</strong>
+      </div>
+      {%endif%}
+      {% endfor %}
+      {% endif %}
+
+      <main>
+      <div class="w-full max-w-sm px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker" >
+        <h1 class="text-xl font-semibold text-center">Update Product</h1>
+        <form action="#" class="space-y-6" method="POST"  enctype="multipart/form-data">
+          {%csrf_token%}
+          
+          <label for="category">Categories:</label>
+          
+          <select id="category" name="category" onchange="selcategory()" required class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker">
+              <option value="" disabled selected>Select Category</option>
+              <option value="lips">Lips</option>
+              <option value="eyes">Eyes</option>  
+              <option value="face">Face</option>
+              <option value="nails">Nails</option>
+              <option value="skincare">Skin Care</option>
+              <option value="ShopByConcern">Shop By Concern</option>          
+              <!-- Add more states as needed -->
+          </select>
+          <label for="Subcategory">Subcategory:</label>
+          <select id="Subcategory" name="Subcategory" required class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker">
+              <option value="" disabled selected>Select Subcategory</option>
+          </select>        
+          <label for="ProductName">Product Name:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="ProductName" placeholder="Product Name" required="" >
+          <label for="ActualPrice">Actual Price:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="ActualPrice" placeholder="ActualPrice" required="" >
+          <label for="offerPrice">Offer Price:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="offerPrice" placeholder="Offer Price">
+          <label for="ProductColour">Product Colour:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="color" name="ProductColour" placeholder="Product Colour" required="" >
+          <label for="StackQuantity">Stack Quantity:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="number" name="StackQuantity" placeholder="Stack Quantity" required="" >
+          <label for="DeliveryCost">Delivery Cost:</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="DeliveryCost" placeholder="Delivery Cost" required="" >
+          <label for="ProductDetails">Product Details:</label>
+          <textarea class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" name="ProductDetails" rows="4" cols="50" placeholder="Type About the product Details....." required="" ></textarea>
+          <label for="ProductInformation">Product Information:</label>
+          <textarea class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" name="ProductInformation" rows="4" cols="50" placeholder="Type About the product Information....." required="" ></textarea>
+          <label for="HowToUse">How to use:</label>
+          <textarea class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" name="HowToUse" rows="4" cols="50" placeholder="Type How To Use the product....." required="" ></textarea>      
+          <label for="img1">Product Main Image</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="file" name="img1" placeholder="Product Image" required="" >
+          <label for="img2">Product Support Image</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="file" name="img2" placeholder="Product Image" required="" >
+          <label for="img3">Product Support Image</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="file" name="img3" placeholder="Product Image" required="" >
+          <label for="img4">Product Support Image</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="file" name="img4" placeholder="Product Image" required="" >
+        
+          <label for="img5">Product Support Image</label>
+          <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="file" name="img5" placeholder="Product Image" required="" >        
+        
+          <div>
+            <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker">
+              submit
+            </button>
+          </div>
+        </form>   
+        
+      </div>
+      
+      </main>
+    </div>
+  <div class="fixed bottom-5 left-5">
+    <button aria-hidden="true" @click="toggleTheme" class="p-2 transition-colors duration-200 rounded-full shadow-md bg-primary hover:bg-primary-darker focus:outline-none focus:ring focus:ring-primary">
+      <svg x-show="isDark" class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+      </svg>
+      <svg x-show="!isDark" class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+  
+{% endblock %}
+

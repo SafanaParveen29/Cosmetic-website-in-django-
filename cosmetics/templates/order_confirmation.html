@@ -1,0 +1,96 @@
+{% load static %}
+{%include 'header.html'%}
+{% block content %}
+
+<div id="page-content">
+    <!--Page Title-->
+    <div class="page section-header text-center">
+        <div class="page-title">
+            <div class="wrapper"><h1 class="page-width">Track Orders</h1></div>
+          </div>
+    </div>
+    <!--End Page Title-->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                {% if messages %}
+                {% for message in messages %}
+                {%if message.tags == 'success'%}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ message }} 
+                </div>
+                {%elif  message.tags == 'error'%}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{message}}
+                </div>
+                {%endif%}
+                {% endfor %}
+                {% endif %}
+                <form action="#" method="post" class="cart style2">
+                    <table>
+                        <thead class="cart__row cart__header">
+                            <tr>
+                                <th colspan="2" class="text-center">Product</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Total Price</th>
+                                <th class="text-center">Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for i in o %}
+                            <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                <td class="cart__image-wrapper cart-flex-item">
+                                    <a href="#"><img class="cart__image" src="/media/{{i.product.img1}}" alt="Elastic Waist Dress - Navy / Small"></a>
+                                </td>
+                                <td class="cart__meta small--text-left cart-flex-item">
+                                    <div class="list-view-item__title">
+                                        <a href="#">{{i.product.ProductName}}</a>
+                                    </div>
+                                    
+                                    <div class="cart__meta-text">
+                                        {{i.product.category}}<br>{{i.product.Subcategory}}<br>
+                                    </div>
+                                </td>
+                                <td class="cart__price-wrapper cart-flex-item text-center">
+                                    <span class="money">₹{{i.product.offerPrice}}</span>
+                                </td>
+                                <td class="cart__update-wrapper cart-flex-item text-right">
+                                    <div class="cart__qty text-center">
+                                        <div class="qtyField">                                            
+                                            <input class="cart__qty-input qty" type="text" name="updates[]" id="qty" value="{{i.quantity}}" disabled>                                            
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="cart__price-wrapper cart-flex-item text-center">
+                                    <span class="money">₹{{i.cart_price}}</span>
+                                </td>
+
+                                <td class="cart__price-wrapper cart-flex-item text-center">
+                                    <span class="money">{{i.delivery_status}}</span>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-left">
+                                    <a href="{%url 'product' %}" class="btn btn-secondary btn--small cart-continue">Continue shopping</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                </table> 
+                </form>                   
+               </div>
+        </div>
+    </div>
+    
+</div>
+
+{%endblock%}
+{%include 'footer.html'%}

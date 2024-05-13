@@ -1,0 +1,190 @@
+{%load static%}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>K-WD Dashboard | Blank Page</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="{%static 'build/css/tailwind.css'%}" >
+  <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+</head>
+<body>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    }
+
+.alert {
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0px;
+  }
+
+.success {
+    color: #4CAF50;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+
+.error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    border-color: #FFD2D2;
+  }
+
+.closebtn {
+    margin-left: 15px;
+    color: #000;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+.closebtn:hover {
+    color: #555;
+  }
+  
+.h-full {
+    height:auto;
+  }
+  
+</style>
+</body>
+<script>
+    const setup = () => {
+      const getTheme = () => {
+        if (window.localStorage.getItem('dark')) {
+          return JSON.parse(window.localStorage.getItem('dark'))
+        }
+        return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      }
+
+      const setTheme = (value) => {
+        window.localStorage.setItem('dark', value)
+      }
+
+      const getColor = () => {
+        if (window.localStorage.getItem('color')) {
+          return window.localStorage.getItem('color')
+        }
+        return 'cyan'
+      }
+
+      const setColors = (color) => {
+        const root = document.documentElement
+        root.style.setProperty('--color-primary', `var(--color-${color})`)
+        root.style.setProperty('--color-primary-50', `var(--color-${color}-50)`)
+        root.style.setProperty('--color-primary-100', `var(--color-${color}-100)`)
+        root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
+        root.style.setProperty('--color-primary-lighter', `var(--color-${color}-lighter)`)
+        root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
+        root.style.setProperty('--color-primary-darker', `var(--color-${color}-darker)`)
+        this.selectedColor = color
+        window.localStorage.setItem('color', color)
+      }
+
+      return {
+        loading: true,
+        isDark: getTheme(),
+        color: getColor(),
+        selectedColor: 'cyan',
+        toggleTheme() {
+          this.isDark = !this.isDark
+          setTheme(this.isDark)
+        },
+        setLightTheme() {
+          this.isDark = false
+          setTheme(this.isDark)
+        },
+        setDarkTheme() {
+          this.isDark = true
+          setTheme(this.isDark)
+        },
+        setColors,
+        toggleSidbarMenu() {
+          this.isSidebarOpen = !this.isSidebarOpen
+        },
+        isSettingsPanelOpen: false,
+        openSettingsPanel() {
+          this.isSettingsPanelOpen = true
+          this.$nextTick(() => {
+            this.$refs.settingsPanel.focus()
+          })
+        },
+        isNotificationsPanelOpen: false,
+        openNotificationsPanel() {
+          this.isNotificationsPanelOpen = true
+          this.$nextTick(() => {
+            this.$refs.notificationsPanel.focus()
+          })
+        },
+        isSearchPanelOpen: false,
+        openSearchPanel() {
+          this.isSearchPanelOpen = true
+          this.$nextTick(() => {
+            this.$refs.searchInput.focus()
+          })
+        },
+        isMobileSubMenuOpen: false,
+        openMobileSubMenu() {
+          this.isMobileSubMenuOpen = true
+          this.$nextTick(() => {
+            this.$refs.mobileSubMenu.focus()
+          })
+        },
+        isMobileMainMenuOpen: false,
+        openMobileMainMenu() {
+          this.isMobileMainMenuOpen = true
+          this.$nextTick(() => {
+            this.$refs.mobileMainMenu.focus()
+          })
+        },
+      }
+    }
+ 
+    function selcategory() {
+        var Selectcategory = document.getElementById("category");
+        var SelectSubcategory = document.getElementById("Subcategory");
+        var categorySelect = Selectcategory.value;
+
+        SelectSubcategory.innerHTML = '<option value="" disabled selected>Select Subcategories</option>';
+
+        if (categorySelect === "lips") {
+            var item = ["Lipsticks & Liners", "Liquid Lipsticks", "Lip Balm", "Gloss"];
+        }
+        else if (categorySelect === "eyes") {
+            var item = ["Eye Liner", "Kajal & Kohl", "Mascara", "Eye Shadow"];
+        }
+        else if (categorySelect === "face") {
+            var item = ["Foundation", "Primer", "Blush", "Highlighter", "Concealer", "Compact"];
+        }
+        else if (categorySelect === "nails") {
+            var item = ["Nail Color", "Polish Remover"];
+        }
+        else if (categorySelect === "skincare") {
+            var item = ["Moisturizers", "Serums", "Sun Protection", "Face Cleansers", "Makeup X Skincare", "Makeup Removers", "Masks and facial kits"];
+        }
+        else if (categorySelect === "ShopByConcern") {
+            var item = ["Glowing Skin", "Hydration", "Anti-Ageing", "Dryness Control", "Oil Control", "Eye Care", "Lip Care"];
+        }
+
+        for (var i = 0; i < item.length; i++) {
+            var option = document.createElement("option");
+            option.value = item[i].toLowerCase();
+            option.text = item[i];
+            SelectSubcategory.appendChild(option);
+        }        
+                        
+    }
+      
+  </script>
+  

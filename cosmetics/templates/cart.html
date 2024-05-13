@@ -1,0 +1,133 @@
+{% load static %}
+{%include 'header.html'%}
+{% block content %}
+
+<div id="page-content">
+    <!--Page Title-->
+    <div class="page section-header text-center">
+        <div class="page-title">
+            <div class="wrapper"><h1 class="page-width">Your cart</h1></div>
+          </div>
+          
+    </div>
+    <!--End Page Title-->    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col">
+                {% if messages %}
+                {% for message in messages %}
+                {%if message.tags == 'success'%}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ message }} 
+                </div>
+                {%elif  message.tags == 'error'%}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{message}}
+                </div>
+                {%endif%}
+                {% endfor %}
+                {% endif %}
+                <form action="#" method="post" class="cart style2">
+                    {%csrf_token%}
+                    <table>
+                        <thead class="cart__row cart__header">
+                            <tr>
+                                <th colspan="2" class="text-center">Product</th>
+                                <th class="text-center">Actual Price</th>
+                                <th class="text-center">Offer Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Total</th>
+                                <th class="action">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                <td class="cart__image-wrapper cart-flex-item">
+                                    <a href="#"><img class="cart__image" src="/media/{{item.Product.img1}}" alt="{{item.Product.ProductName}}"></a>
+                                </td>
+                                <td class="cart__meta small--text-left cart-flex-item">
+                                    <div class="list-view-item__title">
+                                        <a href="#">{{item.Product.ProductName}}</a>
+                                    </div>                                
+                                </td>
+                               
+                                <td class="cart__price-wrapper cart-flex-item">
+                                    <span class="money">₹{{ item.Product.ActualPrice }}</span>
+                                </td>
+                              
+                                <td class="cart__price-wrapper cart-flex-item">
+                                    <span class="money">₹{{ item.Product.offerPrice }}</span>
+                                </td>
+                               
+                                <td class="cart__update-wrapper cart-flex-item text-right">
+                                    <div class="cart__qty text-center">
+                                        <div class="qtyField">
+                                            
+                                            <input class="cart__qty-input qty" type="text" id="qty" value="{{item.quantity}}" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right small--hide cart-price" id="cart_price_{{ item.id }}">
+                                  
+                                    <div id="total_cart_price" class="money">₹{{item.cart_price}}</div>
+                                </td>
+                                <td class="text-center small--hide"><a href="{% url 'remove_from_cart' item.id %}" class="btn btn--secondary cart__remove" title="Remove item"><i class="icon icon anm anm-times-l"></i></a></td>
+                            </tr> 
+                            {%endfor%}
+                            
+                          
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-left"><a href="{%url 'product'%}" class="btn--link cart-continue"><i class="icon icon-arrow-circle-left"></i> Continue shopping</a></td>
+                                <td colspan="3" class="text-right"><button type="submit" name="update" class="btn--link cart-update"><i class="fa fa-refresh"></i> Update</button></td>
+                            </tr>
+                        </tfoot>
+                    </table>                
+                <hr>                
+                </form>                   
+               </div>
+               
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
+            <form method="POST" action="{%url 'place_order'%}" > 
+                {%csrf_token%}
+                <div class="cart-note">
+                    <div class="solid-border">
+                        <h5><label for="CartSpecialInstructions" class="cart-note__label small--text-center">Delivery Address</label></h5>
+                        <textarea name="note" id="CartSpecialInstructions" class="cart-note__input"></textarea>
+                    </div>
+                </div>
+                <div class="solid-border">
+                    <label>Delivery Cost ₹100 for each product</label>
+                  <div class="row">
+                      <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Total</strong></span>
+                    <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">₹{{total_price}}</span></span>
+                  </div>       
+                  <div class="form-group form-check col-md-12 col-lg-12 col-xl-12">
+                    <label class="form-check-label padding-15px-left">
+                        <input type="checkbox" class="form-check-input" value=""><strong>Cash on delivery</strong>
+                    </label>
+                </div>                           
+                  <div class="order-button-payment" id="btn">
+                    <button class="btn" value="Place order" type="submit">Buy Now</button>
+                </div>                
+                </div>
+            </form>
+            </div>
+        
+        </div>
+    </div>    
+</div>
+
+
+{%endblock%}
+{%include 'footer.html'%}

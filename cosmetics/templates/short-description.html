@@ -1,0 +1,305 @@
+{%include 'header.html'%}
+{%load static%}
+        <!--Body Content-->
+        <div id="page-content">
+            <!--MainContent-->
+            <div id="MainContent" class="main-content" role="main">
+                <!--Breadcrumb-->
+                <div class="bredcrumbWrap">
+                    <div class="container breadcrumbs">
+                        <a href="{%url 'body' %}" title="Back to the home page">Home</a>
+                        <span aria-hidden="true">›</span>
+                        <a href="{%url 'products_by_category' category=viewproduct.category %}">{{viewproduct.category}}</a>
+                        <span aria-hidden="true">›</span><span>{{viewproduct.Subcategory}}</span>
+                        <span aria-hidden="true">›</span><span>{{viewproduct.ProductName}}</span>
+                    </div>
+                </div>
+                <!--End Breadcrumb-->
+                
+                <div id="ProductSection-product-template" class="product-template__container prstyle1 container">
+                    <!--product-single-->
+                    <div class="product-single">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="product-details-img">
+                                    <div class="product-thumb">
+                                        
+                                        <div id="gallery" class="product-dec-slider-2 product-tab-left">
+                                            <a data-image="/media/{{viewproduct.img1}}" data-zoom-image="/media/{{viewproduct.img1}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                            <img class="blur-up lazyload" src="/media/{{viewproduct.img1}}" alt="{{viewproduct.ProductName}}" />
+                                            </a>
+                                            <a data-image="/media/{{viewproduct.img2}}" data-zoom-image="/media/{{viewproduct.img2}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="/media/{{viewproduct.img2}}" alt="{{viewproduct.ProductName}}" />
+                                            </a>
+                                            <a data-image="/media/{{viewproduct.img3}}" data-zoom-image="/media/{{viewproduct.img3}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="/media/{{viewproduct.img3}}" alt="{{viewproduct.ProductName}}" />
+                                            </a>
+                                            <a data-image="/media/{{viewproduct.img4}}" data-zoom-image="/media/{{viewproduct.img4}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="/media/{{viewproduct.img4}}" alt="{{viewproduct.ProductName}}" />
+                                            </a>
+                                            <a data-image="/media/{{viewproduct.img5}}" data-zoom-image="/media/{{viewproduct.img5}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="/media/{{viewproduct.img5}}" alt="{{viewproduct.ProductName}}" />
+                                            </a>                          
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="zoompro-wrap product-zoom-right pl-20">
+                                        <div class="zoompro-span">
+                                            <img class="zoompro blur-up lazyload" data-zoom-image="/media/{{viewproduct.img1}}" alt="{{viewproduct.ProductName}}" src="/media/{{viewproduct.img1}}" />
+                                        </div>                                        
+                                        <div class="product-buttons">                                            
+                                            <a href="#" class="btn prlightbox" title="Zoom">
+                                                <i class="icon anm anm-expand-l-arrows" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="lightboximages">
+                                        <a href="/media/{{viewproduct.img1}}" data-size="1462x2048"></a>
+                                        <a href="/media/{{viewproduct.img2}}" data-size="1462x2048"></a>
+                                        <a href="/media/{{viewproduct.img3}}" data-size="1462x2048"></a>
+                                        <a href="/media/{{viewproduct.img4}}" data-size="1462x2048"></a>
+                                        <a href="/media/{{viewproduct.img5}}" data-size="1462x2048"></a>                                        
+                                    </div>
+        
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="product-single__meta">
+                                        <h1 class="product-single__title">{{viewproduct.ProductName}}                                            
+                                        </h1>
+                                        
+                                        <div class="prInfoRow">                                            
+                                            <div class="product-stock">                                         
+                                                {% if viewproduct.StackQuantity > 0 %}
+                                                <span class="instock">In Stock</span>
+                                                {%else%} 
+                                                <span class="outstock" style="color: red;">Unavailable</span>
+                                                {% endif%}                                            
+                                            </div>
+                                            
+                                            <div class="product-review"><a class="reviewLink" href="#tab2"><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><span class="spr-badge-caption">6 reviews</span></a></div>
+                                        </div>
+                                        {% if offer > 0 %}
+                                        <p class="product-single__price product-single__price-product-template">
+                                            <span class="visually-hidden">Regular price</span>
+                                            <s id="ComparePrice-product-template"><span class="money">₹{{viewproduct.ActualPrice}} </span></s>
+                                            <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                                <span id="ProductPrice-product-template"><span class="money">₹{{viewproduct.offerPrice}}</span></span>
+                                            </span>
+
+                                            <span class="discount-badge"> <span class="devider">|</span>&nbsp;
+                                                <span>You Save</span>
+                                                <span id="SaveAmount-product-template" class="product-single__save-amount">
+                                                <span class="money">₹{{offer}}</span>
+                                                </span>
+                                                <span class="off">(<span>{{offerpercentage}}</span>%)</span>
+                                            </span>  
+                                        </p> 
+                                        {%else%}
+                                        <p class="product-single__price product-single__price-product-template">
+                                            <span class="visually-hidden">Regular price</span>                                          
+                                            <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                                <span id="ProductPrice-product-template"><span class="money">₹{{viewproduct.ActualPrice}}</span></span>
+                                            </span>
+                                        </p>                                        
+                                        {%endif%}
+                                    </div>
+                                    <!-- End Product Price -->
+                                    <div class="product-single__description rte">
+                                        {{viewproduct.HowToUse}}
+                                    </div>
+                                    {% if viewproduct.StackQuantity <= 10 and viewproduct.StackQuantity > 0  %}
+                                    <div id="quantity_message">Hurry! Only <span class="items">few</span>  left in stock.</div>
+                                    {%endif%}
+                                    <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+                                        <div class="swatch clearfix swatch-0 option1" data-option-index="0">
+                                            <div class="product-form__item">
+                                              <label class="header">Color<span class="slVariant"></span></label>  
+                                              <div data-value="Black" class="swatch-element color black available">                                            
+                                                <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0" value="Black">                                            
+                                                <label class="swatchLbl color small" for="swatch-0-black" style="background-color:{{viewproduct.ProductColour}};" title=""></label>
+                                              </div>                                     
+                                            </div>
+                                        </div>
+                                        <div class="swatch clearfix swatch-1 option2" data-option-index="1">
+                                            <div class="product-form__item">
+                                              <label class="header">For Delivery:<span class="slVariant">₹{{viewproduct.DeliveryCost}}</span></label>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Product Action -->
+                                        <div class="product-action clearfix">
+                                                                         
+                                            {% if viewproduct.StackQuantity > 0 %}
+                                            <div class="product-form__item--submit">
+                                                <a href="{% url 'add_to_cart' viewproduct.id %}">
+                                                <button type="button" name="add" class="btn product-form__cart-submit">
+                                                    <span>Add to cart</span>
+                                                </button>
+                                                </a>
+                                            </div>
+                                            {%else%}
+                                            <div class="product-form__item--submit">
+                                                <a href="{% url 'add_to_cart' viewproduct.id %}">
+                                                <button type="button" name="add" class="btn product-form__cart-submit" disabled>
+                                                    <span>Add to cart</span>
+                                                </button>
+                                                </a>
+                                            </div>
+                                            {%endif%}
+                                            
+                                        </div>
+                                        <!-- End Product Action -->
+                                    </form>
+
+                                    <div class="display-table shareRow">
+                                            
+                                            <div class="display-table-cell text-right">
+                                                <div class="social-sharing">
+                                                    <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-facebook" title="Share on Facebook">
+                                                        <i class="fa fa-facebook-square" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Share</span>
+                                                    </a>
+                                                    <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-twitter" title="Tweet on Twitter">
+                                                        <i class="fa fa-twitter" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Tweet</span>
+                                                    </a>
+                                                    <a href="#" title="Share on google+" class="btn btn--small btn--secondary btn--share" >
+                                                        <i class="fa fa-google-plus" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Google+</span>
+                                                    </a>
+                                                    <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-pinterest" title="Pin on Pinterest">
+                                                        <i class="fa fa-pinterest" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Pin it</span>
+                                                    </a>
+                                                    <a href="#" class="btn btn--small btn--secondary btn--share share-pinterest" title="Share by Email" target="_blank">
+                                                        <i class="fa fa-envelope" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Email</span>
+                                                    </a>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        
+                                    <p id="freeShipMsg" class="freeShipMsg" data-price="1000">
+                                        <i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY 
+                                        <b class="freeShip">
+                                            <span class="money" data-currency-usd="₹1000.00" data-currency="IND">₹1000.00</span>
+                                        </b> AWAY FROM <b>FREE SHIPPING!</b>
+                                    </p>
+                                    <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">{{today_date}}</b> and <b id="toDate">{{deliveryDate}}</b>.</p>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                    <!--End-product-single-->
+                    <!--Product Fearure-->
+                    <div class="prFeatures">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature">
+                                <img src="{%static 'assets/images/credit-card.png'%}" alt="Safe Payment" title="Safe Payment" />
+                                <div class="details"><h3>Safe Payment</h3>Pay with the world's most payment methods.</div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature">
+                                <img src="{%static 'assets/images/shield.png'%}" alt="Confidence" title="Confidence" />
+                                <div class="details"><h3>Confidence</h3>Protection covers your purchase and personal data.</div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature">
+                                <img src="{%static 'assets/images/worldwide.png'%}" alt="Worldwide Delivery" title="Worldwide Delivery" />
+                                <div class="details"><h3>Worldwide Delivery</h3>FREE &amp; fast shipping to over 200+ countries &amp; regions.</div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature">
+                                <img src="{%static 'assets/images/phone-call.png'%}" alt="Hotline" title="Hotline" />
+                                <div class="details"><h3>Hotline</h3>Talk to help line for your question on 4141 456 789, 4125 666 888</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Product Fearure-->
+                    <!--Product Tabs-->
+                    <div class="tabs-listing">
+                        <ul class="product-tabs">
+                            <li rel="tab1"><a class="tablink">Product Details</a></li>
+                            <li rel="tab2"><a class="tablink">Product Reviews</a></li>
+                            <li rel="tab3"><a class="tablink">Information</a></li>
+                            <li rel="tab4"><a class="tablink">How to use</a></li>
+                        </ul>
+                        <div class="tab-container">
+                            <div id="tab1" class="tab-content">
+                                <div class="product-description rte">
+                                    {{viewproduct.ProductDetails}}
+                                </div>
+                            </div>
+                            
+                            <div id="tab2" class="tab-content">
+                                <div id="shopify-product-reviews">
+                                    <div class="spr-container">
+                                        <div class="spr-header clearfix">
+                                            <div class="spr-summary">
+                                                <span class="product-review"><a class="reviewLink"><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i> </a><span class="spr-summary-actions-togglereviews">Based on 6 reviews456</span></span>
+                                                <span class="spr-summary-actions">
+                                                    <a href="#new-review-form" class="spr-summary-actions-newreview btn">Write a review</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="spr-content">
+                                            <div class="spr-form clearfix">
+                                                <form method="post" id="new-review-form" class="new-review-form">
+                                                    {%csrf_token%}
+                                                    <h3 class="spr-form-title">Write a review</h3>
+                                                    <fieldset class="spr-form-contact">
+                                                        <div class="spr-form-contact-name">
+                                                          <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                                          <input class="spr-form-input spr-form-input-text " id="review_author_10508262282" type="text" name="review[author]" value="" placeholder="Enter your name">
+                                                        </div>
+                                                        <div class="spr-form-contact-email">
+                                                          <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                                          <input class="spr-form-input spr-form-input-email " id="review_email_10508262282" type="email" name="review[email]" value="" placeholder="john.smith@example.com">
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="spr-form-review">
+                                                      <div class="spr-form-review-rating">
+                                                        <label class="spr-form-label">Rating</label>
+                                                        <div class="spr-form-input spr-starrating">
+                                                          <div class="product-review"><a class="reviewLink" href="#"><i class="fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i></a></div>
+                                                        </div>
+                                                      </div>
+                                                
+                                                      <div class="spr-form-review-title">
+                                                        <label class="spr-form-label" for="review_title_10508262282">Review Title</label>
+                                                        <input class="spr-form-input spr-form-input-text " id="review_title_10508262282" type="text" name="review[title]" value="" placeholder="Give your review a title">
+                                                      </div>
+                                                
+                                                      <div class="spr-form-review-body">
+                                                        <label class="spr-form-label" for="review_body_10508262282">Body of Review <span class="spr-form-review-body-charactersremaining">(1500)</span></label>
+                                                        <div class="spr-form-input">
+                                                          <textarea class="spr-form-input spr-form-input-textarea " id="review_body_10508262282" data-product-id="10508262282" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
+                                                        </div>
+                                                      </div>
+                                                    </fieldset>
+                                                    <fieldset class="spr-form-actions">
+                                                        <input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            <div id="tab3" class="tab-content">
+                                {{viewproduct.ProductInformation}}
+                          </div>
+                            
+                            <div id="tab4" class="tab-content">
+                                {{viewproduct.HowToUse}}
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Product Tabs-->
+                    
+                    </div>
+                <!--#ProductSection-product-template-->
+            </div>
+            <!--MainContent-->
+        </div>
+    	<!--End Body Content-->
+        
+       
+{%include 'footer.html'%}
+    
+   
